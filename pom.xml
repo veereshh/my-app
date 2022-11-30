@@ -77,15 +77,40 @@
       </plugins>
     </pluginManagement>
   </build>
-  
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>3.0.0-M7</version>
-      </plugin>
-    </plugins>
-  </reporting>
-  
+
+  <profiles>
+
+    <profile>
+      <id>dev</id>
+      <build>
+        <finalName>${project.artifactId}
+        </finalName>
+        <filters>
+          <filter>/src/main/resources/dev-properties</filter>
+        </filters>
+      </build>
+    </profile>
+
+    <profile>
+      <id>stage</id>
+      <build>
+        <finalName>${project.artifactId}-stage</finalName>
+        <filters>
+          <filter>${basedir}/src/main/resources/stage-properties</filter>
+        </filters>
+      </build>
+    </profile>
+
+    <profile>
+      <id>prod</id>
+      <build>
+        <finalName>${project.artifactId}</finalName>
+        <filters>
+          <filter>/src/main/resources/prod-properties</filter>
+        </filters>
+      </build>
+    </profile>
+
+  </profiles>
+
 </project>
